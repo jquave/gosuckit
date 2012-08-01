@@ -9,6 +9,7 @@ This app developed as an experiment in Ruby game dev with gosu.
 * Check out the repository from github
 * Run bundle install
 * Then start with
+
 > ruby game.rb
 
 
