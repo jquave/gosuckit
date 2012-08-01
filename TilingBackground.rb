@@ -15,7 +15,7 @@ class TilingBackground
     @scale = 1
 
 
-    # Offset of this image
+    # Offset of this imaget ad
     @xo = 0
     @yo = 0
 
