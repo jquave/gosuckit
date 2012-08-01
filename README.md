@@ -1,4 +1,4 @@
-# gosuckit (temporary name)
+# Gosukit will be a Cocos2d like game layer for the Gosu ruby rendering engine
 
 
 
