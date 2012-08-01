@@ -7,13 +7,7 @@ class GameWindow < Gosu::Window
   def initialize
     super 640, 480, false
     self.caption = "Go Suck It"
-#    @bg = Gosu::Image.new(self, "space.jpg", true)
-#    @s = Smoker.new(self)
- #   @particles = Array.new
-  #  numParticles = 10
-   # (0..numParticles).each { |f|
-   #   @particles << Smoker.new(self)
-   # }
+    
     @player = Player.new(self)
     @bg = TilingBackground.new(self, @player, "12-Grass-Texture-III.jpeg")
 
@@ -21,34 +15,18 @@ class GameWindow < Gosu::Window
     (1..5).each do |i|
       b = TilingBackground.new(self,@player,"trees.png")
       b.scrollSpeed = i
-#      b.scale = Math.sqrt(i)
       @bgs << b
     end
-
-#    @bgFront = TilingBackground.new(self, @player, "trees.png")
-#    @bgFront.scrollSpeed = 2
-#    
-#    @bgBack = TilingBackground.new(self, @player, "trees.png")
-#    @bgBack.scrollSpeed = 3
 
   end
 
   def update
-#    @particles.each { |p| p.update }
     @player.update
     @bg.update
-#    @bgFront.update
-#    @bgBack.update
     @bgs.each do |bg|
       bg.update
     end
 
-
-#    if button_down? Gosu::KbA or button_down? Gosu::KbD then
-#      @player.isWalking = true
-#    else
-#      @player.isWalking = false                                 
-#    end
 
     @player.isWalking = (button_down? Gosu::KbA or button_down? Gosu::KbD)
 
@@ -73,13 +51,6 @@ class GameWindow < Gosu::Window
       close
     end
 
-
-
-
-
-
-
-
     if id == Gosu::KbD || id == Gosu::KbA
       @player.isWalking = true
     end
@@ -101,9 +72,7 @@ class GameWindow < Gosu::Window
   end
 
   def button_up(id)
- #   if id == Gosu::KbD || id == Gosu::KbA
- #     @player.isWalking = false
- #   end
+    # Handle button depresses here if needed
   end
 
 end

@@ -1,11 +1,11 @@
 
 
 require 'gosu'
+require './Smoker.rb'
 
 
 class Player
   def initialize(window)
-#    @img = Gosu::Image.new(window, "player.png", true)
     @tiles = Gosu::Image.load_tiles(window, "player.png", 64, 63, true)
     @ry = 480-64
     @rx = 150
@@ -24,6 +24,17 @@ class Player
     @walkspeed = 1
     @maxjumpspeed = 10
 
+    # Particle emitter #TODO abstract to Particle Emitter class
+    @smokeParticles = Array.new
+    (1..100).each do |i|
+      p = Smoker.new(window, @rx, @ry, self)
+      p.xvel = Random.rand(100)/100.0
+      p.yvel = Random.rand(100)/100.0 - 4
+      p.life = 9000 + Random.rand(1000)
+      p.startEmitting
+      @smokeParticles << p
+    end
+
   end
 
   attr_accessor :isWalking, :x, :y, :isJumping
@@ -33,8 +44,11 @@ class Player
   end
   
   def update
-      puts "x: #{@x},  y: #{@y}, jump: #{@isJumping}"
 
+    # Update smoke particles
+    @smokeParticles.each do |p|
+      p.update
+    end
 
     if grounded
       @yv = 0
@@ -68,8 +82,10 @@ class Player
   end
 
   def draw
-#    @img.draw(@x,@y,0)
     @tiles[@frame].draw_rot(@rx,@ry,0, 0, 0.5,0,-@direction,1)
+    @smokeParticles.each do |p|
+      p.draw
+    end
   end
 
   def walkLeft
